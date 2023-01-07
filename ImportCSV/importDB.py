@@ -1,5 +1,6 @@
 import pymysql
 import sys
+import unidecode
 
 def csv_to_mysql(load_query,TableQuerySQL, host, user, password,database):
     """Fonction qui execute le requêtes dans la base de données sql
@@ -33,9 +34,9 @@ def csv_to_mysql(load_query,TableQuerySQL, host, user, password,database):
         sys.exit(1)
 
 #nome de la futur table
-TableName='stat_croise'
+TableName='stat_full'
 #Chemin du csv a convertir
-CSV = "C:/Users/alexa/Documents/GitHub/FootBallStats/ImportCSV/CDM2014StatCroise.csv"
+CSV = "C:/wamp/www/FootBallStats/ImportCSV/CDM2014.csv"
 #ouverture du csv a convertir
 file = open(CSV, "r",encoding="utf-8")
 reader = file.read()
@@ -51,6 +52,7 @@ for i in range(len(TableRowName[0])):
     replaceCHR = R"""- """
     for c in replaceCHR: ColumName = ColumName.replace(c,"_")
     for c in illegalCHR: ColumName = ColumName.replace(c,'')
+    ColumName = unidecode.unidecode(ColumName)
     #verification du type d'arg de la colone
     try:
         int(TableRowName[1][i])
