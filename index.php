@@ -32,14 +32,13 @@
         </div>
         <?php
         if (isset($_GET['recherche'])){
-            $result = getAllPlayerInTeam($_GET['recherche']);
+            $result = getAllPlayersInTeam($_GET['recherche']);
             foreach ($result as $playerN => $player){
                 echo "$playerN = $player <br>";
             }
         }else{
             echo "entrer votre recherche";
         }
-        
         ?>
     </body>
 
