@@ -69,11 +69,29 @@
         try{
             $q = $db->prepare($query);
             $q->execute();
-            $result = $q->fetch();
+            $result = $q->fetchAll();
             return $result;
         }catch(PDOException $e){
             echo $e;
         }
+    }
+
+    /**
+     * Retourne un tableau propre avec les résultats d'une requête
+     * 
+     * @param   array    $result     Array de la requête
+     * 
+     * @return  array    $nArray     Array propre pour l'exploitation
+     */
+    function remakeArray($result){
+        $nArray = [];
+        foreach($result as $r => $ar){
+            $x = 0;
+            foreach ($ar as $t => $c){
+                if ($x == 0){array_push($nArray,$c);$x+=1;} //creation du tableau en enlevant les doublons
+            }
+        }
+        return $nArray;
     }
 
     /**
@@ -110,16 +128,38 @@
     }
 
     /**
+     * Retourne toutes les teams de la CDM
+     * 
+     * @return array   $result     Toutes les équipes
+     */
+    function getAllTeams(){
+        $query = querySelectMaker("stat_croise",['Equipe']);
+        $result = resultQuery($query);
+        return remakeArray($result);
+    }
+
+    /**
+     * Retourne tout les joueurs de la CDM
+     * 
+     * @return array   $result     Tout les joueurs
+     */
+    function getAllPlayers(){
+        $query = querySelectMaker("stat_full",['Joueur']);
+        $result = resultQuery($query);
+        return remakeArray($result);
+    }
+
+    /**
      * Retourne tous les joueurs d'une équipe
      * 
      * @param  string  $equipe     Nom de l'équipe demandé
      * 
      * @return array   $result     Tous les joueurs l'équipe demandé
      */
-    function getAllPlayerInTeam($equipe){
+    function getAllPlayersInTeam($equipe){
         $query = querySelectMaker('stat_full',['Joueur'])."WHERE Equipe = '$equipe'";
         $result = resultQuery($query);
-        return $result;
+        return remakeArray($result);
     }
 
 ?>

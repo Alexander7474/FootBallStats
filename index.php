@@ -2,7 +2,10 @@
 <html lang="en">
 
     <head>
-        <?php include 'api/api.php'; ?>
+        <?php 
+        include "api/api.php";
+        include "php/function.php";
+        ?>
         <meta charset="UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,13 +14,12 @@
     </head>
 
     <body>
-        <?php $_GET["something"] = ""; ?>
     <h1>Search the Content with Search Bar</h1>
         <div class="top">
-            <form method="GET" action="#">
+            <form method="GET">
                 <div class="tableBar">
                     <div class="tableDivision">
-                        <input type="text" name="something" placeholder="Rechercher" required>
+                        <input type="text" name="recherche" placeholder="Rechercher" required>
                     </div>
                     <div class="tableDivision" id="myID">
                         <button type="submit">
@@ -28,11 +30,16 @@
                 </div>
             </form>
         </div>
-        <?php 
-        $team = getAllPlayerInTeam("France");
-        foreach ($team as $x => $r){
-            echo "$r = $x <br>";
+        <?php
+        if (isset($_GET['recherche'])){
+            $result = getAllPlayerInTeam($_GET['recherche']);
+            foreach ($result as $playerN => $player){
+                echo "$playerN = $player <br>";
+            }
+        }else{
+            echo "entrer votre recherche";
         }
+        
         ?>
     </body>
 
