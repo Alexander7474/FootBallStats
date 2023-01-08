@@ -77,16 +77,22 @@
     }
 
     /**
-     * Retourne les stats selon l'ID du joueur renseigné.
+     * Retourne les stats selon l'ID ou le nom du joueur renseigné.
      * 
-     * @param  int     $playerID   ID du joueur demandé
+     * @param  int     $player     identifiant du joueur demandé
      * @param  array   $stat       Stat du joueur que la fonction doit renvoyer, laisser vide pour tous envoyer
      * 
      * @return array   $result     Résultat de la requête
      */
-    function getPlayerStat($playerID,$stat=[]) {
-        $query = querySelectMaker("stat_full",$stat)."WHERE ID = $playerID"; //création de la requête
-        return resultQuery($query);
+    function getPlayerStat($player,$stat=[]) {
+        $query = querySelectMaker("stat_full",$stat); //création de la requête
+        if (gettype($player) == 'integer'){
+            $query = $query."WHERE ID = $player";
+        } else{
+            $query = $query."WHERE Joueur = '$player'";
+        }
+        $result = resultQuery($query);
+        return $result;
     }
 
     /**
@@ -99,12 +105,21 @@
      */
     function getTeamStat($equipe,$stat=[]) {
         $query = querySelectMaker("stat_croise",$stat)."WHERE Equipe = '$equipe'"; //création de la requête
-        return resultQuery($query);
+        $result = resultQuery($query);
+        return $result;
     }
 
-    $f = getTeamStat("France");
-    foreach($f as $x => $t){
-        echo "$x = $t <br>";
+    /**
+     * Retourne tous les joueurs d'une équipe
+     * 
+     * @param  string  $equipe     Nom de l'équipe demandé
+     * 
+     * @return array   $result     Tous les joueurs l'équipe demandé
+     */
+    function getAllPlayerInTeam($equipe){
+        $query = querySelectMaker('stat_full',['Joueur'])."WHERE Equipe = '$equipe'";
+        $result = resultQuery($query);
+        return $result;
     }
 
 ?>

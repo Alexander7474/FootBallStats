@@ -2,6 +2,7 @@
 <html lang="en">
 
     <head>
+        <?php include 'api/api.php'; ?>
         <meta charset="UTF-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,12 +29,11 @@
             </form>
         </div>
         <?php 
-            try{
-                echo $_GET['something'];
-            }catch(Exception $e){
-                echo 'Rechercher des stats sur les joueurs';
-            }
-            ?>
+        $team = getAllPlayerInTeam("France");
+        foreach ($team as $x => $r){
+            echo "$r = $x <br>";
+        }
+        ?>
     </body>
 
 </html>
