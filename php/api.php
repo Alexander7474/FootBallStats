@@ -110,7 +110,7 @@
             $query = $query."WHERE Joueur = '$player'";
         }
         $result = resultQuery($query);
-        return $result;
+        return $result[0];
     }
 
     /**
@@ -124,7 +124,7 @@
     function getTeamStat($equipe,$stat=[]) {
         $query = querySelectMaker("stat_croise",$stat)."WHERE Equipe = '$equipe'"; //création de la requête
         $result = resultQuery($query);
-        return $result;
+        return $result[0];
     }
 
     /**
