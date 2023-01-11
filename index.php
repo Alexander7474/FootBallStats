@@ -14,10 +14,14 @@
 <body>
       
     <!-- input tag -->
-    <form action="index.php" method="get">
+    <form method="get">
         <input id="searchbar" onkeyup="search_joueur()" type="text"
-            name="recherche" placeholder="Search joueur..">
+            name="recherche" placeholder="Rechercher...">
         <button type="submit">Rechercher</button>
+    </form>
+    <form method="get">
+        <input id="changeMode" type="submit" name="mode" value="team">
+        <input id="changeMode" type="submit" name="mode" value="player">
     </form>
       
     <!-- ordered list -->

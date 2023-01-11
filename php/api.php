@@ -8,7 +8,7 @@
      * @param  string  $user    User d'acces de la db
      * @param  string  $pass    Password de la db
      * 
-     * @return object  $db      Object db pour faire les requêtes vers la db
+     * @return (object,null)$db Object db pour faire les requêtes vers la db
      */
     function dbConnect($host,$name,$user,$pass=''){
 
@@ -25,6 +25,8 @@
         } catch(PDOException $e){
             echo $e;
         }
+
+    return null;
     }
 
     //Connection à la db------------remplir les champs-----------------------------------------------------------------//
@@ -62,7 +64,7 @@
      * 
      * @param   string  $query      Requête
      * 
-     * @return  array   $result     Résultats de la requête
+     * @return  array  $result     Résultats de la requête
      */
     function resultQuery($query){
         global $db; //recupération de la db en global
@@ -74,6 +76,7 @@
         }catch(PDOException $e){
             echo $e;
         }
+        return [];
     }
 
     /**
