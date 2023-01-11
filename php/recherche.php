@@ -16,14 +16,8 @@
             echo "entrer votre recherche<br>";
             echo "Il y a " . sizeof($Player_Array) . " joueurs";
             foreach ($Player_Array as $j => $name) {
-                echo "<li class='joueur'>$name</li>";
+                echo "<a href='http://127.0.0.1/FootBallStats/playerpage.php?player=$name'><li class='joueur'>$name</li></a>";
             }
-        }
-    }
-    if (isset($_GET['recherche'])){
-        if($_GET['recherche'] != null){
-            echoArray(getTeamStat($_GET['recherche']));
-            echoArray(getPlayerStat($_GET['recherche']));
         }
     }
 

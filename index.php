@@ -3,8 +3,7 @@
       
 <head>
     <title>
-        Creating Search Bar using HTML
-        CSS and Javascript
+        FootStat
     </title>
       
     <!-- linking the stylesheet(CSS) -->
