@@ -32,7 +32,7 @@
      * @param string $name  Nom du joueur
      */
     function echoPlayerLink($name){
-        echo "<a href='http://127.0.0.1/FootBallStats/playerpage.php?player=".urlencode($name)."'>$name</a>";
+        echo "<a href='http://127.0.0.1/playerpage.php?player=".urlencode($name)."'>$name</a>";
     }
 
 ?>

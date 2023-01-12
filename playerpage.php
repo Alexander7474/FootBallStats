@@ -15,6 +15,7 @@
 </head>
   
 <body>
+    <?php include "php/navigation.php"; ?>
     <?php
     if (isset($_GET['player'])){
         try{

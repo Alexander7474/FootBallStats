@@ -9,7 +9,7 @@
             echo "entrer votre recherche<br>";
             echo "Il y a " . sizeof($Team_Array) . " teams";
             foreach ($Team_Array as $j => $name) {
-                echo "<a href='http://127.0.0.1/FootBallStats/teampage.php?team=".urlencode($name)."'><li class='search'>$name</li></a>";;
+                echo "<a href='http://127.0.0.1/teampage.php?team=".urlencode($name)."'><li class='search'>$name</li></a>";;
             }
         } elseif ($_GET['mode'] == "player") {
             $Player_Array = getAllPlayers();

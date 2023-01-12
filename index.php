@@ -15,7 +15,7 @@
     <?php include "php/navigation.php"; ?>
       
     <!-- input tag -->
-    <form method="get">
+    <form action= method="get">
         <input id="searchbar" onkeyup="search_joueur()" type="text"
             name="recherche" placeholder="Rechercher...">
         <button type="submit">Rechercher</button>
