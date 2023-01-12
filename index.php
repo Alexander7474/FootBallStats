@@ -11,6 +11,8 @@
 </head>
   
 <body>
+
+    <?php include "php/navigation.php"; ?>
       
     <!-- input tag -->
     <form method="get">

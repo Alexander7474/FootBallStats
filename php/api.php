@@ -108,9 +108,9 @@
     function getPlayerStat($player,$stat=[]) {
         $query = querySelectMaker("stat_full",$stat); //création de la requête
         if (gettype($player) == 'integer'){
-            $query = $query."WHERE ID = $player";
+            $query = $query.'WHERE ID = "'.$player.'"';
         } else{
-            $query = $query."WHERE Joueur = '$player'";
+            $query = $query.'WHERE Joueur = "'.$player.'"';
         }
         $result = resultQuery($query);
         return $result[0];
@@ -125,7 +125,7 @@
      * @return array   $result     Résultat de la requête
      */
     function getTeamStat($equipe,$stat=[]) {
-        $query = querySelectMaker("stat_croise",$stat)."WHERE Equipe = '$equipe'"; //création de la requête
+        $query = querySelectMaker("stat_croise",$stat).'WHERE Equipe = "'.$equipe.'"'; //création de la requête
         $result = resultQuery($query);
         return $result[0];
     }
@@ -160,7 +160,7 @@
      * @return array   $result     Tous les joueurs l'équipe demandé
      */
     function getAllPlayersInTeam($equipe){
-        $query = querySelectMaker('stat_full',['Joueur'])."WHERE Equipe = '$equipe'";
+        $query = querySelectMaker('stat_full',['Joueur']).'WHERE Equipe = "'.$equipe.'"';
         $result = resultQuery($query);
         return remakeArray($result);
     }

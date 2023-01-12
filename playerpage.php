@@ -18,13 +18,16 @@
     <?php
     if (isset($_GET['player'])){
         try{
-            $PlayerStat = getPlayerStat($_GET['player']);
-            echoArray($PlayerStat);
+            $PlayerStat = getPlayerStat(urldecode($_GET['player']));
+            ?>
+            <h1>Joueur: <?php echo $PlayerStat['Joueur']; ?>
+            <h2>Stat: <br> <?php echoStat($PlayerStat);?></h2>
+            <?php
         }catch(Exception $e){
             echo $e;
         }
     }else{
-        echo 'erreur 404';
+        echo '<h1>erreur 404 pas de joueur trouvé</h1>';
     }
     ?>
 </body>

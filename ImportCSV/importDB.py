@@ -48,7 +48,7 @@ TableQuerySQL = """CREATE TABLE """+TableName+"""("""
 for i in range(len(TableRowName[0])):
     #nom de la colone en enlevant les chr illégaux
     ColumName = TableRowName[0][i]
-    illegalCHR = R"""\/'.()[]#"!-*£ù%^;?=+"""
+    illegalCHR = R"""\/.'()[]#"!-*£ù%^;?=+"""
     replaceCHR = R"""- """
     for c in replaceCHR: ColumName = ColumName.replace(c,"_")
     for c in illegalCHR: ColumName = ColumName.replace(c,'')
