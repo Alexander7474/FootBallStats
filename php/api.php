@@ -165,4 +165,19 @@
         return remakeArray($result);
     }
 
+    /**
+     * 
+     */
+    function addUser($userNickname,$userPass,$userEmail,$userName,$userSurname,$date){
+        global $db;
+        $userPass = sha1($userPass);
+        $query = 'INSERT INTO UserTable VALUES ("'.$userNickname.'","'.$userPass.'","'.$userEmail.'","'.$userName.'","'.$userSurname.'","'.$date.'")';
+        try{
+            $q = $db->prepare($query);
+            $q->execute();
+        }catch(PDOException $e){
+            echo $e;
+        }
+    }
+
 ?>
