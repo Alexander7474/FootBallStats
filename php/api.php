@@ -166,18 +166,39 @@
     }
 
     /**
+     * Permet d'ajouter un utilisateur dans la table users
      * 
+     * @param   string  $username pseudo de l'utilisateur
+     * @param   string  $userPass     mot de pass de l'utilisateur
+     * @param   string  $userEmail    email de l'utilisateur
+     * @param   string  $name     prénom de l'utilisateur
+     * @param   string  $userSurname  nom de l'utilisateur
+     * @param   string  $date         date de naissance de l'utlisateur
      */
-    function addUser($userNickname,$userPass,$userEmail,$userName,$userSurname,$date){
+    function addUser($username,$pass,$email,$name,$surname,$date){
         global $db;
-        $userPass = sha1($userPass);
-        $query = 'INSERT INTO UserTable VALUES ("'.$userNickname.'","'.$userPass.'","'.$userEmail.'","'.$userName.'","'.$userSurname.'","'.$date.'")';
+        $pass = password_hash($pass, PASSWORD_ARGON2ID);
+        $query = "INSERT INTO users(username, password, email, name, surname, birthday)
+        VALUE(:ername, :password, :email, :name, :surname, :birthday)"; 
         try{
             $q = $db->prepare($query);
-            $q->execute();
+            $q->execute([
+                ':ername'=>$username, 
+                ':password'=>$pass, 
+                ':email'=>$email, 
+                ':name'=>$name, 
+                ':surname'=>$surname, 
+                ':birthday'=>$date
+            ]);
         }catch(PDOException $e){
             echo $e;
         }
     }
+
+    function checkUsername($username){ 
+        $query = querySelectMaker("users",["username"])."WHERE username =".$username;
+        $result = resultQuery($query);
+    }
+
 
 ?>
