@@ -177,13 +177,13 @@
      */
     function addUser($username,$pass,$email,$name,$surname,$date){
         global $db;
-        $pass = password_hash($pass, PASSWORD_ARGON2ID);
+        $pass = sha1($pass);
         $query = "INSERT INTO users(username, password, email, name, surname, birthday)
-        VALUE(:ername, :password, :email, :name, :surname, :birthday)"; 
+        VALUE(:username, :password, :email, :name, :surname, :birthday)"; 
         try{
             $q = $db->prepare($query);
             $q->execute([
-                ':ername'=>$username, 
+                ':username'=>$username, 
                 ':password'=>$pass, 
                 ':email'=>$email, 
                 ':name'=>$name, 
@@ -195,9 +195,28 @@
         }
     }
 
-    function checkUsername($username){ 
-        $query = querySelectMaker("users",["username"])."WHERE username =".$username;
+    /**
+     * Retourne True si un utilisateur exist et False si non selon un 
+     * email ou un username renvoyé
+     * 
+     * @param string $user   email ou username
+     * 
+     * @return bool
+     */
+    function userExist($user){
+        $query = querySelectMaker("users",["username"])."WHERE username ='".$user."'";
         $result = resultQuery($query);
+        if (count($result) > 0){
+            return True;
+        }else{
+            $query = querySelectMaker("users",["email"])."WHERE email ='".$user."'";
+            $result = resultQuery($query);
+            if (count($result) > 0){
+                return True;
+            }else{
+                return False;
+            }
+        }
     }
 
 
