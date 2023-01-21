@@ -14,18 +14,11 @@
 
     <?php 
     include "php/navigation.php";
-    include "php/login_method.php";
+
+    include "php/".$_GET['page'];
     ?>
 
-    <form method="post">
-        <input type="text" placeholder="identifiant" name="username" id="register"><br>
-        <input type="password" placeholder="mot de passe" name="password" id="register"><br>
-        <input type="email" placeholder="email" name="email" id="register"><br>
-        <input type="text" placeholder="prénom" name="name" id="register"><br>
-        <input type="text" placeholder="nom" name="surname" id="register"><br>
-        <input type="text" placeholder="date naissance" name="date" id="register"><br>
-        <input class="button_under" type="submit" name="buttonregister" id="register" value="Inscription">
-    </form>
+
       
 </body>
   
