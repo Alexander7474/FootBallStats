@@ -7,7 +7,7 @@
     </title>
       
     <!-- linking the stylesheet(CSS) -->
-    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <?php 
     include "php/api.php";
     include "php/function.php";

@@ -32,7 +32,17 @@
      * @param string $name  Nom du joueur
      */
     function echoPlayerLink($name){
-        echo "<a href='http://127.0.0.1/playerpage.php?player=".urlencode($name)."'>$name</a>";
+        echo "<a id='search' href='http://127.0.0.1/playerpage.php?player=".urlencode($name)."'>$name</a>";
     }
+
+    /**
+     * Affiche le nom d'un joueur link sur sa page profil
+     * 
+     * @param string $name  Nom du joueur
+     */
+    function echoTeamLink($name){
+        echo "<a id='search' href='http://127.0.0.1/teampage.php?team=".urlencode($name)."'>$name</a>";
+    }
+
 
 ?>

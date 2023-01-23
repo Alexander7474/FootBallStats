@@ -1,0 +1,66 @@
+body {
+    background-color: lightblue;
+    text-align: center;
+}
+  
+h1 {
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+    font-size: 20px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(94, 94, 94);
+  }
+  
+  li#nav{
+    float: left;
+    list-style-type: none;
+  }
+  
+  li a#nav {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li a:hover#nav {
+    background-color: rgb(77, 77, 77);
+  }
+  
+  li#search{
+    background-color: rgb(94, 94, 94);
+    list-style-type: none;
+    width: 15%; 
+    text-align:center;
+    height: 100%;
+    font-size: initial;
+    display: inline-block;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 1px;
+  }
+  
+  li a#search {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  li a:hover#search {
+    background-color: rgb(77, 77, 77);
+  }

@@ -7,16 +7,16 @@
         if ($_GET['mode'] == "team") {
             $Team_Array = getAllTeams();
             echo "entrer votre recherche<br>";
-            echo "Il y a " . sizeof($Team_Array) . " teams";
+            echo "Il y a " . sizeof($Team_Array) . " teams<br>";
             foreach ($Team_Array as $j => $name) {
-                echo "<a href='http://127.0.0.1/teampage.php?team=".urlencode($name)."'><li class='search'>$name</li></a>";;
+                ?><li id="search" class='search'><?php echoTeamLink($name); ?></li><?php
             }
         } elseif ($_GET['mode'] == "player") {
             $Player_Array = getAllPlayers();
             echo "entrer votre recherche<br>";
-            echo "Il y a " . sizeof($Player_Array) . " joueurs";
+            echo "Il y a " . sizeof($Player_Array) . " joueurs<br>";
             foreach ($Player_Array as $j => $name) {
-                ?><li class='search'><?php echoPlayerLink($name); ?></li><?php
+                ?><li id="search" class='search'><?php echoPlayerLink($name); ?></li><?php
             }
         }
     }
