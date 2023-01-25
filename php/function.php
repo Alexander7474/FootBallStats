@@ -44,5 +44,4 @@
         echo "<a id='search' href='http://127.0.0.1/teampage.php?team=".urlencode($name)."'>$name</a>";
     }
 
-
 ?>

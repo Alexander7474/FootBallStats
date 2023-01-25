@@ -27,8 +27,7 @@
             <h2>Stat: <br> <?php echoStat($TeamStat);?></h2><br>
             <h2>Joueurs: <br><?php            
             foreach ($TeamsCompo as $j => $name) {
-                echoPlayerLink($name);
-                ?><br><?php
+                ?><li id="search"><?php echoPlayerLink($name); ?></li><?php
             }
             ?></h2>
             <?php
