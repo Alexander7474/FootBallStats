@@ -8,7 +8,7 @@
      * @param  string  $user    User d'acces de la db
      * @param  string  $pass    Password de la db
      * 
-     * @return (object,null)$db Object db pour faire les requêtes vers la db
+     * @return (object,null) $db Object db pour faire les requêtes vers la db
      */
     function dbConnect($host,$name,$user,$pass=''){
 
