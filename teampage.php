@@ -22,8 +22,12 @@
             $team = urldecode($_GET['team']);
             $TeamStat = getTeamStat($team);
             $TeamsCompo = getAllPlayersInTeam($team);
-            ?>
+            $image = searchImage($TeamStat['Equipe']."FootBall Group photo 2014", 1, "google");
+            ?> 
             <h1>Equipe: <?php echo $TeamStat['Equipe']; ?>
+            <br>
+            <img src=<?php echo $image[0]['uri'];?> alt="encrypted-tbn0.gstatic.com">
+            <br>
             <h2>Stat: <br> <?php echoStat($TeamStat);?></h2><br>
             <h2>Joueurs: <br><?php            
             foreach ($TeamsCompo as $j => $name) {
