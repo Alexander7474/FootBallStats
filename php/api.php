@@ -8,7 +8,7 @@
      * @param  string  $user    User d'acces de la db
      * @param  string  $pass    Password de la db
      * 
-     * @return (object,null) $db Object db pour faire les requêtes vers la db
+     * @return (object,null)$db Object db pour faire les requêtes vers la db
      */
     function dbConnect($host,$name,$user,$pass=''){
 
@@ -196,6 +196,27 @@
     }
 
     /**
+     * Retourne les données d'un utilisateur selon un email ou un username
+     * 
+     * @param string $user   email ou username
+     * 
+     * @return array
+     */
+    function userData($user){
+        if (!strpos($user, "@")) {
+            $query = querySelectMaker("users") . "WHERE username ='" . $user . "'";
+        }else{
+            $query = querySelectMaker("users")."WHERE email ='".$user."'";
+        }
+        $result = resultQuery($query);
+        if (count($result) > 0){
+            return $result[0];
+        }else{
+            return [];
+        }
+    }
+
+    /**
      * Retourne True si un utilisateur exist et False si non selon un 
      * email ou un username renvoyé
      * 
@@ -204,20 +225,12 @@
      * @return bool
      */
     function userExist($user){
-        $query = querySelectMaker("users",["username"])."WHERE username ='".$user."'";
-        $result = resultQuery($query);
-        if (count($result) > 0){
+        $userdata = userData($user);
+        if (count($userdata) > 0){
             return True;
         }else{
-            $query = querySelectMaker("users",["email"])."WHERE email ='".$user."'";
-            $result = resultQuery($query);
-            if (count($result) > 0){
-                return True;
-            }else{
-                return False;
-            }
+            return False;
         }
     }
-
 
 ?>
