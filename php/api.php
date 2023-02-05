@@ -166,6 +166,17 @@
     }
 
     /**
+     * Retourne tous les matchs à jouer
+     * 
+     * @return array   $result     tableau des matchs à jouer
+     */
+    function getAllMatchToPlay(){
+        $query = querySelectMaker("table_match_non_joue");
+        $result = resultQuery($query);
+        return $result;
+    }
+
+    /**
      * Permet d'ajouter un utilisateur dans la table users
      * 
      * @param   string  $username pseudo de l'utilisateur

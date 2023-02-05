@@ -13,9 +13,14 @@
       echo 'starting the day<br>';
       start();
     }
+    if (isset($_POST['next_round'])) {
+      echo 'next round<br>';
+      next_round();
+    }
     ?>
     <form method="post">
       <input type="submit" name="start_match_day" value="Démarrer jour de match!">
+      <input type="submit" name="next_round" value="Passer le tour">
     </form>
 </body>
 </html>

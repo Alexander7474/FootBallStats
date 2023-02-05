@@ -55,7 +55,10 @@ function start(){
             $n=[];
         }
     }
+}
 
+function next_round(){
+    print_r(getAllMatchToPlay());
 }
 
 function clear_match_day(){
