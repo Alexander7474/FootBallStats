@@ -1,6 +1,9 @@
 // JavaScript code
 function search_joueur() {
     let input = document.getElementById('searchbar').value
+    if(input =='yobama'){
+        console.log('ok');
+    }
     input=input.toLowerCase();
     let x = document.getElementsByClassName('search');
     
@@ -9,7 +12,7 @@ function search_joueur() {
             x[i].style.display="none";
         }
         else {
-            x[i].style.display="list-item";                 
+            x[i].style.display="list-item";          
         }
     }
 }

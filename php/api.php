@@ -106,7 +106,7 @@
      * @return array   $result     Résultat de la requête
      */
     function getPlayerStat($player,$stat=[]) {
-        $query = querySelectMaker("stat_full",$stat); //création de la requête
+        $query = querySelectMaker("table_joueur",$stat); //création de la requête
         if (gettype($player) == 'integer'){
             $query = $query.'WHERE ID = "'.$player.'"';
         } else{
@@ -125,7 +125,7 @@
      * @return array   $result     Résultat de la requête
      */
     function getTeamStat($equipe,$stat=[]) {
-        $query = querySelectMaker("stat_croise",$stat).'WHERE Equipe = "'.$equipe.'"'; //création de la requête
+        $query = querySelectMaker("table_equipe",$stat).'WHERE Equipe = "'.$equipe.'"'; //création de la requête
         $result = resultQuery($query);
         return $result[0];
     }
@@ -136,7 +136,7 @@
      * @return array   $result     Toutes les équipes
      */
     function getAllTeams(){
-        $query = querySelectMaker("stat_croise",['Equipe']);
+        $query = querySelectMaker("table_equipe",['Equipe']);
         $result = resultQuery($query);
         return remakeArray($result);
     }
@@ -147,7 +147,7 @@
      * @return array   $result     Tout les joueurs
      */
     function getAllPlayers(){
-        $query = querySelectMaker("stat_full",['Joueur']);
+        $query = querySelectMaker("table_joueur",['Joueur']);
         $result = resultQuery($query);
         return remakeArray($result);
     }
@@ -160,7 +160,7 @@
      * @return array   $result     Tous les joueurs l'équipe demandé
      */
     function getAllPlayersInTeam($equipe){
-        $query = querySelectMaker('stat_full',['Joueur']).'WHERE Equipe = "'.$equipe.'"';
+        $query = querySelectMaker('table_joueur',['Joueur']).'WHERE Equipe = "'.$equipe.'"';
         $result = resultQuery($query);
         return remakeArray($result);
     }
@@ -178,7 +178,7 @@
     function addUser($username,$pass,$email,$name,$surname,$date){
         global $db;
         $pass = sha1($pass);
-        $query = "INSERT INTO users(username, password, email, name, surname, birthday)
+        $query = "INSERT INTO table_utilisateurs(pseudo, mdp, email, nom, prenom, naissance)
         VALUE(:username, :password, :email, :name, :surname, :birthday)"; 
         try{
             $q = $db->prepare($query);
@@ -204,9 +204,9 @@
      */
     function userData($user){
         if (!strpos($user, "@")) {
-            $query = querySelectMaker("users") . "WHERE username ='" . $user . "'";
+            $query = querySelectMaker("table_utilisateurs") . "WHERE pseudo ='" . $user . "'";
         }else{
-            $query = querySelectMaker("users")."WHERE email ='".$user."'";
+            $query = querySelectMaker("table_utilisateurs")."WHERE email ='".$user."'";
         }
         $result = resultQuery($query);
         if (count($result) > 0){

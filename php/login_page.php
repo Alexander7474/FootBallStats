@@ -20,7 +20,7 @@ if (isset($_POST["buttonlogin"])){
         if(userExist($idtf)){
             $userdata = userData($idtf);
             $hashpass = sha1($password);
-            if ($hashpass == $userdata['password']){
+            if ($hashpass == $userdata['mdp']){
                 echo "connection réussie";
             }else{
                 echo "username/email ou mot de passe incorrect !";
