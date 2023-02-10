@@ -233,4 +233,17 @@
         }
     }
 
+    /**
+     * Retourne les données d'une table 
+     * 
+     * @param  string $name  nom de la table
+     * 
+     * @return array $result  table demandé
+     */
+    function getTable($name){
+        $query = querySelectMaker($name);
+        $result = resultQuery($query);
+        return $result;
+    }
+
 ?>
