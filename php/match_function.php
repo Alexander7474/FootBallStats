@@ -18,8 +18,10 @@ function start(){
     $team_power = []; //creation du tableau power 
     foreach($team as $t => $name){
         $classement = getTeamStat($name,['classement_fifa']);
-        $r = 100-$classement['classement_fifa'];
-        $power = rand(10,$r);
+        $re = 100-($classement['classement_fifa']*1.2);
+        $rs = $re/1.4;
+        $power = rand($rs,$re);
+        echo "$name classement=".$classement['classement_fifa']." re=$re rs=$rs power=$power<br>";
         $team_power[$name] = $power;
     }
     $team_power = shuffle_assoc($team_power);
@@ -32,7 +34,7 @@ function start(){
         try{
             $q = $db->prepare($query);
             $q->execute([
-                ':equipe'=>$team, 
+                ':equipe'=>$team,
                 ':power'=>$power
             ]);
         }catch(PDOException $e){
@@ -72,7 +74,7 @@ function clearMatch(){
 
 function clearDay(){
     global $db;
-    $query = "DELETE FROM table_match_non_joue; DELETE FROM table_match_power";
+    $query = "DELETE FROM table_match_non_joue; DELETE FROM table_match_power; DELETE FROM table_match_joue";
     try{
         $q = $db->prepare($query);
         $q->execute();
@@ -96,8 +98,8 @@ function nextRound(){
     $powers = $npowers;
     $matchs = getTable("table_match_non_joue");
     foreach($matchs as $m => $match){
-        $score_team_1 = floor(rand($powers[$match["equipe1"]], 100)/10);
-        $score_team_2 = floor(rand($powers[$match["equipe2"]], 100)/10);
+        $score_team_1 = floor(rand(0,$powers[$match["equipe1"]])/15);
+        $score_team_2 = floor(rand(0,$powers[$match["equipe2"]])/15);
         if ($score_team_1>$score_team_2){
             $score = strval($score_team_1) . "-" . strval($score_team_2);
             $query = "INSERT INTO table_match_joue(equipe1,  equipe2, score) VALUE(:equipe1, :equipe2, :score)";
@@ -109,11 +111,14 @@ function nextRound(){
             array_push($winners, $match['equipe2']);$winner = $match['equipe2'];
             array_push($loosers, $match['equipe1']);$looser = $match['equipe1'];
         }else{
-            $score = strval($score_team_2+1) . "-" . strval($score_team_2);
+            $score_team_1+=1;
+            $score = strval($score_team_1) . "-" . strval($score_team_2);
             $query = "INSERT INTO table_match_joue(equipe1,  equipe2, score) VALUE(:equipe1, :equipe2, :score)";
-            array_push($winners, $match['equipe2']);$winner = $match['equipe2'];
-            array_push($loosers, $match['equipe1']);$looser = $match['equipe1'];
+            array_push($winners, $match['equipe1']);$winner = $match['equipe1'];
+            array_push($loosers, $match['equipe2']);$looser = $match['equipe2'];
         }
+        echo "match: ".$match['equipe1']."/".$match['equipe2']."<br>";
+        echo "$score_team_1-$score_team_2<br>";
         try{
             $q = $db->prepare($query);
             $q->execute([
